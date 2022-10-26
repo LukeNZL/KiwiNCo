@@ -1,0 +1,83 @@
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<nav>
+    <a id="logo" href="{% url 'home' %}">
+        <img id="logo-image" src="{% static 'images/logo.png' %}">
+    </a>
+
+    <div id="catagory-container">
+        <a class="unselectable" class="header-catagories" href="{% url 'catagory' %}">
+            <div style="display: flex; justify-content: center; font-size: 32px;">Catagory 1</div>
+        </a>
+        <a class="unselectable" class="header-catagories" href="{% url 'catagory' %}">
+            <div style="display: flex; justify-content: center; font-size: 32px;">Catagory 2</div>
+        </a>
+        <a class="unselectable" class="header-catagories" href="{% url 'catagory' %}">
+            <div style="display: flex; justify-content: center; font-size: 32px;">Catagory 3</div>
+        </a>
+        <a class="unselectable" class="header-catagories" href="{% url 'catagory' %}">
+            <div style="display: flex; justify-content: center; font-size: 32px;">Catagory 4</div>
+        </a>
+    </div>
+
+    <div id="search-bar-box">
+        <div id="search-image-box">
+            <img id="search-image" src="{% static 'images/Search.png' %}">
+        </div>
+        <div id="search-bar" contenteditable="True"></div>
+    </div>
+
+    <div id="account-image-box" onclick=showAccount()>
+        <img id="account-image" src="{% static 'images/Account.png' %}">
+    </div>
+
+    <div id="account-container">
+    </div>
+
+    <div id="cart-container">
+    </div>
+
+    <div id="cart-image-box" onclick=showCart()>
+        <img id="cart-image" src="{% static 'images/Cart.png' %}">
+    </div>
+
+    <script>
+        function showCart(){
+            document.addEventListener('click', function handleClickOutsideBox(event) {
+            const box = document.getElementById('cart-container');
+            const button = document.getElementById('cart-image-box');
+
+            if (!box.contains(event.target) && !button.contains(event.target)) {
+                box.style.display = 'none';
+            }
+
+            if (button.contains(event.target)) {
+                document.getElementById("cart-container").style.display = "flex";
+            }
+            });
+        }
+
+
+        function showAccount(){
+            document.addEventListener('click', function handleClickOutsideBox(event) {
+            const box = document.getElementById('account-container');
+            const button = document.getElementById('account-image-box');
+
+            if (!box.contains(event.target) && !button.contains(event.target)) {
+                box.style.display = 'none';
+            }
+
+            if (button.contains(event.target)) {
+                document.getElementById("account-container").style.display = "flex";
+            }
+            });
+        }
+
+
+    </script>
+</nav>
+{% endblock %}
