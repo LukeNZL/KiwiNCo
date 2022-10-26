@@ -1,0 +1,57 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+    <div id="item-container">
+        <div id="item-images-container">
+            <div id="large-image-container">
+                <div style="font-size: 50px;">/</div>
+                <div id="large-image-box">
+                    <img id="large-image" src="" alt="">
+                </div>
+                <div style="font-size: 50px;">></div>
+            </div>
+            <div id="small-image-container">
+                <div class="small-image-box">
+                    <img class="small-image" src="" alt="">
+                </div>
+                <div class="small-image-box">
+                    <img class="small-image" src="" alt="">
+                </div>
+                <div class="small-image-box">
+                    <img class="small-image" src="" alt="">
+                </div>                
+                <div class="small-image-box">
+                    <img class="small-image" src="" alt="">
+                </div>
+                <div class="small-image-box">
+                    <img class="small-image" src="" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div id="item-options-container">
+            <div id="item-name">Item Name</div>
+            <div id="size-container">
+                <div class="size">XS</div>
+                <div class="size">S</div>
+                <div class="size">M</div>                
+                <div class="size">L</div>
+                <div class="size">XL</div>
+            </div>
+
+            <div id="item-cost">$0.00</div>
+
+            <div class="buy-item-button">Add to Cart</div>
+            <div class="buy-item-button">Buy Now</div>
+        </div>
+    </div>
+
+    <div style="margin-top: 30px; font-size: 22px; margin-left: 20%; margin-right: 20%;">Description</div>
+    <div style="margin-top: 30px; font-size: 14px; margin-left: 20%; margin-right: 20%;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus dolore perferendis tempore deleniti dolorem, omnis atque, reprehenderit laborum eos veritatis blanditiis minus laboriosam mollitia accusantium quaerat eligendi doloribus, ea soluta?</div>
+
+    <footer></footer>
+</body>
+
+{% endblock %}

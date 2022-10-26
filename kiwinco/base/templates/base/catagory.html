@@ -1,0 +1,105 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+    <div id="catagory-sub-header">
+        <div style="font-size:36px; margin-left: 50px;">Item Catagory</div>
+        <div style="margin-right: 150px;">
+            <label style="font-size:26px; font-weight: 600;">Sort By</label>
+            <select name="sort" id="sort">
+                <option value="Newest-Release">Newest Release</option>
+                <option value="Oldest-Release">Oldest Release</option>
+                <option value="Price-low-to-high" selected>Price low to high</option>
+                <option value="Price-high-to-low">Price high to low</option>
+            </select>
+        </div>
+    </div>
+    
+
+
+
+
+    <div id="catagory-item-row">
+
+        <a id="main-item-container" href="{% url 'item' %}">
+            <div id="main-item-image-box">
+                <img id="main-item-image" src="" alt="">
+            </div>
+            <div id="main-item-cost">$0.00</div>
+        </a>
+
+        <a id="main-item-container" href="{% url 'item' %}">
+            <div id="main-item-image-box">
+                <img id="main-item-image" src="" alt="">
+            </div>
+            <div id="main-item-cost">$0.00</div>
+        </a>
+
+        <a id="main-item-container" href="{% url 'item' %}">
+            <div id="main-item-image-box">
+                <img id="main-item-image" src="" alt="">
+            </div>
+            <div id="main-item-cost">$0.00</div>
+        </a>
+
+        <a id="main-item-container" href="{% url 'item' %}">
+            <div id="main-item-image-box">
+                <img id="main-item-image" src="" alt="">
+            </div>
+            <div id="main-item-cost">$0.00</div>
+        </a>
+
+        <a id="main-item-container" href="{% url 'item' %}">
+            <div id="main-item-image-box">
+                <img id="main-item-image" src="" alt="">
+            </div>
+            <div id="main-item-cost">$0.00</div>
+        </a>
+
+    </div>
+
+    <div id="catagory-item-row">
+
+        <a id="main-item-container" href="{% url 'item' %}">
+            <div id="main-item-image-box">
+                <img id="main-item-image" src="" alt="">
+            </div>
+            <div id="main-item-cost">$0.00</div>
+        </a>
+
+        <a id="main-item-container" href="{% url 'item' %}">
+            <div id="main-item-image-box">
+                <img id="main-item-image" src="" alt="">
+            </div>
+            <div id="main-item-cost">$0.00</div>
+        </a>
+
+        <a id="main-item-container" href="{% url 'item' %}">
+            <div id="main-item-image-box">
+                <img id="main-item-image" src="" alt="">
+            </div>
+            <div id="main-item-cost">$0.00</div>
+        </a>
+
+        <a id="main-item-container" href="{% url 'item' %}">
+            <div id="main-item-image-box">
+                <img id="main-item-image" src="" alt="">
+            </div>
+            <div id="main-item-cost">$0.00</div>
+        </a>
+
+        <a id="main-item-container" href="{% url 'item' %}">
+            <div id="main-item-image-box">
+                <img id="main-item-image" src="" alt="">
+            </div>
+            <div id="main-item-cost">$0.00</div>
+        </a>
+
+    </div>
+
+
+    <footer></footer>
+</body>
+
+{% endblock %}
