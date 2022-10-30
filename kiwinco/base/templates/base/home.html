@@ -10,212 +10,100 @@
 
 
     <div id = "main-catagory-container">
-        <div id="main-catagory-title">Catagory 1</div>
+        <div id="main-catagory-title">Shirts</div>
         <div id="main-item-row">
 
-            <a id="main-item-container" href="{% url 'item' %}">
+            {% for list in shirt_list %}
+
+            <a id="main-item-container" href="{% url 'item' list.id %}">
                 <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
+                    <img id="main-item-image" src="{{ list.Image.url }}" alt="">
                 </div>
-                <div id="main-item-cost">$0.00</div>
+                <div id="main-item-cost">${{ list.Price }}</div>
             </a>
 
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-
-            <div class="unselectable" style="font-size: 60px;">></div>
-
+            {% endfor %}
 
 
         </div>
 
 
-        <a href="{% url 'catagory' %}">see all</a>
+        <a href="{% url 'catagory' 'Shirts' %}">see all</a>
 
 
     </div>
 
     <div id = "main-catagory-container">
-        <div id="main-catagory-title">Catagory 2</div>
+        <div id="main-catagory-title">Jumpers</div>
         <div id="main-item-row">
 
-            <a id="main-item-container" href="{% url 'item' %}">
+            {% for list in jumper_list %}
+
+            <a id="main-item-container" href="{% url 'item' list.id %}">
                 <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
+                    <img id="main-item-image" src="{{ list.Image.url }}" alt="">
                 </div>
-                <div id="main-item-cost">$0.00</div>
+                <div id="main-item-cost">${{ list.Price }}</div>
             </a>
 
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
+            {% endfor %}
 
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-
-            <div class="unselectable" style="font-size: 60px;">></div>
 
 
 
         </div>
 
 
-        <a href="{% url 'catagory' %}">see all</a>
+        <a href="{% url 'catagory' 'Jumpers' %}">see all</a>
 
 
     </div>
 
     <div id = "main-catagory-container">
-        <div id="main-catagory-title">Catagory 3</div>
+        <div id="main-catagory-title">Pants</div>
         <div id="main-item-row">
 
-            <a id="main-item-container" href="{% url 'item' %}">
+            {% for list in pants_list %}
+
+            <a id="main-item-container" href="{% url 'item' list.id %}">
                 <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
+                    <img id="main-item-image" src="{{ list.Image.url }}" alt="">
                 </div>
-                <div id="main-item-cost">$0.00</div>
+                <div id="main-item-cost">${{ list.Price }}</div>
             </a>
 
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-
-            <div class="unselectable" style="font-size: 60px;">></div>
+            {% endfor %}
 
 
 
         </div>
 
 
-        <a href="{% url 'catagory' %}">see all</a>
+        <a href="{% url 'catagory' 'Pants' %}">see all</a>
 
 
     </div>
 
     <div id = "main-catagory-container">
-        <div id="main-catagory-title">Catagory 4</div>
+        <div id="main-catagory-title">Shoes</div>
         <div id="main-item-row">
+                {% for list in shoes_list %}
 
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
+                <a id="main-item-container" href="{% url 'item' list.id %}">
+                    <div id="main-item-image-box">
+                        <img id="main-item-image" src="{{ list.Image.url }}" alt="">
+                    </div>
+                    <div id="main-item-cost">${{ list.Price }}</div>
+                </a>
 
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-            <a id="main-item-container" href="{% url 'item' %}">
-                <div id="main-item-image-box">
-                    <img id="main-item-image" src="" alt="">
-                </div>
-                <div id="main-item-cost">$0.00</div>
-            </a>
-
-
-            <div class="unselectable" style="font-size: 60px;">></div>
-
-
-
+                {% endfor %}
         </div>
 
-
-        <a href="{% url 'catagory' %}">see all</a>
+        <a href="{% url 'catagory' 'Shoes' %}">see all</a>
 
 
     </div>
+
 
     <footer>
     </footer>
