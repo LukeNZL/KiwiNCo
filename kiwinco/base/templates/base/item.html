@@ -8,7 +8,7 @@
             <div id="large-image-container">
                 <div style="font-size: 50px;">/</div>
                 <div id="large-image-box">
-                    <img id="large-image" src="" alt="">
+                    <img id="large-image" src="{{ item.Image.url }}" alt="">
                 </div>
                 <div style="font-size: 50px;">></div>
             </div>
@@ -32,16 +32,18 @@
         </div>
 
         <div id="item-options-container">
-            <div id="item-name">Item Name</div>
+            <div id="item-name">{{item.ItemName}}</div>
             <div id="size-container">
-                <div class="size">XS</div>
-                <div class="size">S</div>
-                <div class="size">M</div>                
-                <div class="size">L</div>
-                <div class="size">XL</div>
+                <div id="XS" class="size" onclick="test('XS')">XS</div>
+                <div id="S" class="size" onclick="test('S')">S</div>
+                <div id="M" class="size" onclick="test('M')">M</div>
+                <div id="L" class="size" onclick="test('L')">L</div>
+                <div id="XL" class="size" onclick="test('XL')">XL</div>
             </div>
 
-            <div id="item-cost">$0.00</div>
+            <div id="item-cost">${{item.Price}}</div>
+
+            <div id="item-stock">Stock: </div>
 
             <div class="buy-item-button">Add to Cart</div>
             <div class="buy-item-button">Buy Now</div>
@@ -49,7 +51,43 @@
     </div>
 
     <div style="margin-top: 30px; font-size: 22px; margin-left: 20%; margin-right: 20%;">Description</div>
-    <div style="margin-top: 30px; font-size: 14px; margin-left: 20%; margin-right: 20%;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus dolore perferendis tempore deleniti dolorem, omnis atque, reprehenderit laborum eos veritatis blanditiis minus laboriosam mollitia accusantium quaerat eligendi doloribus, ea soluta?</div>
+    <div style="margin-top: 30px; font-size: 14px; margin-left: 20%; margin-right: 20%;">{{item.Description}}</div>
+
+    <script>
+
+        function test(size){
+            console.log("testing");
+            reset('XS');
+            reset('S');
+            reset('M');
+            reset('L');
+            reset('XL');
+            document.getElementById(size).style.backgroundColor = "black";
+            document.getElementById(size).style.color = "white";
+            if (size == "XS"){
+                document.getElementById('item-stock').textContent = "Stock: " + {{item.Stock_XS}}
+            }
+            if (size == "S"){
+                document.getElementById('item-stock').textContent = "Stock: " + {{item.Stock_S}}
+            }
+            if (size == "M"){
+                document.getElementById('item-stock').textContent = "Stock: " + {{item.Stock_M}}
+            }
+            if (size == "L"){
+                document.getElementById('item-stock').textContent = "Stock: " + {{item.Stock_L}}
+            }
+            if (size == "XL"){
+                document.getElementById('item-stock').textContent = "Stock: " + {{item.Stock_XL}}
+            }
+        }
+
+        function reset(size){
+            document.getElementById(size).style.backgroundColor = "white";
+            document.getElementById(size).style.color = "black";
+
+        }
+
+    </script>
 
     <footer></footer>
 </body>
