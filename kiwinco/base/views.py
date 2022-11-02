@@ -18,7 +18,24 @@ def item(request, item_id):
     return render(request, 'base/item.html', context)
 
 def catagory(request,catagory):
+
     item_list = Item.objects.order_by('created')
+
+    sort_value = 'Newest-Release'
+
+    if 'sort_value' in request.GET:
+        if (request.GET['sort_value'] == 'Oldest-Release'):
+            item_list = Item.objects.order_by('-created')
+            sort_value = 'Oldest-Release'
+        elif (request.GET['sort_value'] == 'Price-low-to-high'):
+            item_list = Item.objects.order_by('Price')
+            sort_value = 'Price-low-to-high'
+        elif (request.GET['sort_value'] == 'Price-high-to-low'):
+            item_list = Item.objects.order_by('-Price')
+            sort_value = 'Price-high-to-low'
+        else:
+            item_list = Item.objects.order_by('created')
+            sort_value = 'Newest-Release'
 
     if (catagory == 'Shirts'):
         item_list = item_list.filter(Shirt = True)
@@ -31,5 +48,5 @@ def catagory(request,catagory):
     else:
         return redirect('home')
 
-    context = {'catagory': catagory, 'item_list': item_list}
+    context = {'catagory': catagory, 'item_list': item_list, 'sort_value': sort_value}
     return render(request, 'base/catagory.html', context)
