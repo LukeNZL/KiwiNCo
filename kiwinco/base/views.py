@@ -48,10 +48,42 @@ def home(request):
 
 def item(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
-    context = {'item': item}
+
+    form = RegisterForm()
+
+    if request.method == 'POST':
+        if "register" in request.POST:  # add the name "register" in your html button
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.username = user.username.lower()
+                user.save()
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, 'An error occurred during registration')
+
+        if "login" in request.POST:  # add the name "login" in your html button
+            username = request.POST.get('username').lower()
+            password = request.POST.get('password')
+
+            try:
+                user = User.objects.get(username=username)
+            except:
+                messages.error(request, 'User does not exist')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, 'Username or password does not exist')
+
+    context = {'item': item, 'page': page}
     return render(request, 'base/item.html', context)
 
 def catagory(request,catagory):
+
+    form = RegisterForm()
 
     item_list = Item.objects.order_by('created')
 
@@ -82,7 +114,34 @@ def catagory(request,catagory):
     else:
         return redirect('home')
 
-    context = {'catagory': catagory, 'item_list': item_list, 'sort_value': sort_value}
+    if request.method == 'POST':
+        if "register" in request.POST:  # add the name "register" in your html button
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.username = user.username.lower()
+                user.save()
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, 'An error occurred during registration')
+
+        if "login" in request.POST:  # add the name "login" in your html button
+            username = request.POST.get('username').lower()
+            password = request.POST.get('password')
+
+            try:
+                user = User.objects.get(username=username)
+            except:
+                messages.error(request, 'User does not exist')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, 'Username or password does not exist')
+
+    context = {'catagory': catagory, 'item_list': item_list, 'sort_value': sort_value, 'form': form}
     return render(request, 'base/catagory.html', context)
 
 # def registerPage(request):
