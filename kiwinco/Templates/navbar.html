@@ -36,6 +36,85 @@
     </div>
 
     <div id="account-container">
+        {% if request.user.is_authenticated %}
+        <p id="display-user">Logged in as {{request.user}}</p>
+        <a href="{% url 'logout' %}" class="header-button">Logout</a>
+        {% else %}
+        <div id="login-signup-button">
+            <a href="{% url 'login' %}"  class="header-button">LOGIN</a>
+            <div class="header-divider">|</div>
+            <a href="{% url 'register' %}" class="header-button">SIGN UP</a>
+        </div>
+        {% endif %}
+
+        {% if page == 'login' %}
+        <div>
+            <form method="POST", action="">
+                {% csrf_token %}
+                <!--Login form-->
+                <div class="login-box">
+                    <input class="user-input" type="text" placeholder="Username" name="username">
+                    <input class="user-input" type="password" placeholder="Password" name="password">
+                    <div>
+                        <input class="login-button" type="submit" value="Login" />
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        {% else %}
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                <!--Signup form that only works with no closing-->
+                <div class="login-box">
+                    <input class="user-input" placeholder="Username" action="{{form.username}}
+                    <input class="user-input" placeholder="Password" type="password" action="{{form.password1}}
+                    <input class="user-input" placeholder="Confirm Password" type="password" action="{{form.password2}}
+                    <div>
+                        <input class="login-button" type="submit" value="Sign Up" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+
+     <!--   {% if request.user.is_authenticated %}
+        <p id="display-user">Logged in as {{request.user}}</p>
+        <a href="{% url 'logout' %}" class="header-button">Logout</a>
+        {% else %}
+        <h3>Login</h3>
+        <form method="POST", action="">
+            {% csrf_token %}
+
+            <div class="login-box">
+                <input class="user-input" type="text" placeholder="Username" name="username">
+                <input class="user-input" type="password" placeholder="Password" name="password">
+                <div>
+                    <input class="login-button" type="submit" value="Login" />
+                </div>
+
+            </div>
+        </form>
+
+
+       <h3>Dont have an account?</h3>
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="login-box">
+                <input class="user-input" placeholder="Username" action="{{form.username}}">
+                <input class="user-input" placeholder="Password" type="password" action="{{form.password1}}">
+                <input class="user-input" placeholder="Confirm Password" type="password" action="{{form.password2}}">
+                <div>
+                    <input class="login-button" type="submit" value="Sign Up">
+                </div>
+
+            </div>
+        </form>
+
+        {% endif %} -->
+
     </div>
 
     <div id="cart-container">

@@ -97,7 +97,9 @@ nav{
     width: 50px;
     object-fit: cover;
 }
-
+#login-signup-button{
+display: contents;
+}
 #account-image{
     height: 50px;
     width: 50px;
@@ -113,6 +115,7 @@ nav{
     height: 600px;
     background-color: #D2D2D2;
     display: none;
+
 }
 
 #account-container{
@@ -123,7 +126,7 @@ nav{
     width: 400px;
     height: 600px;
     background-color: #D2D2D2;
-    display: none;
+    display: inline-block;
 }
 
 #specials-box{
@@ -323,7 +326,30 @@ nav{
     font-size: 24px;
     margin-top: 30px;
 }
+.login-box{
+    height: auto;
+    width: 50%;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+}
+.user-input{
+    background-color: #f5;
+    font-size: 18px;
+    margin-top: 10px;
+    width: 60%;
+    height: 15px;
+    border-radius: 20px;
+    padding: 10px;
+    outline: none;
 
+}
+.header-button{
+    margin-bottom: 0px;
+    margin-right: 20px;
+    width: 100px;
+    align-content: center;
+    align-items: center;
 
 footer{
     width: 100%;
