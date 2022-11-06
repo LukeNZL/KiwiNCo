@@ -1,11 +1,12 @@
 import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import Item
+from .models import Item, CartedItem
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from.forms import RegisterForm
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 def home(request):
@@ -78,7 +79,7 @@ def item(request, item_id):
             else:
                 messages.error(request, 'Username or password does not exist')
 
-    context = {'item': item, 'page': page}
+    context = {'item': item, 'form': form}
     return render(request, 'base/item.html', context)
 
 def catagory(request,catagory):
@@ -185,3 +186,13 @@ def catagory(request,catagory):
 def logoutUser(request):
     logout(request)
     return redirect('home')
+
+@csrf_exempt
+def addToCart(request, item_id):
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            x = CartedItem(price=request.POST['price'], itemId=item_id, buyerId=request.user.id, itemSize=request.POST['size'])
+            x.save()
+        else:
+            messages.error(request, 'Must be logged in to cart items')
+    return redirect("/" + str(item_id) )

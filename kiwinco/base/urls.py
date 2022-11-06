@@ -10,5 +10,6 @@ urlpatterns = [
     #path('register/', views.registerPage, name='register'),
     path('<int:item_id>/', views.item, name='item'),
     path('<str:catagory>/', views.catagory, name='catagory'),
+    path('addToCart/<int:item_id>', views.addToCart, name='addToCart'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
