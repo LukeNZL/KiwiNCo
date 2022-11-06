@@ -13,7 +13,37 @@ def home(request):
     jumper_list = Item.objects.filter(Jumper_Jacket=True)[:7]
     pants_list = Item.objects.filter(Pants=True)[:7]
     shoes_list = Item.objects.filter(Shoes=True)[:7]
-    context = { 'shirt_list':shirt_list, 'jumper_list':jumper_list, 'pants_list':pants_list, 'shoes_list':shoes_list}
+
+    form = RegisterForm()
+
+    if request.method == 'POST':
+        if "register" in request.POST:  # add the name "register" in your html button
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.username = user.username.lower()
+                user.save()
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, 'An error occurred during registration')
+
+        if "login" in request.POST:  # add the name "login" in your html button
+            username = request.POST.get('username').lower()
+            password = request.POST.get('password')
+
+            try:
+                user = User.objects.get(username=username)
+            except:
+                messages.error(request, 'User does not exist')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, 'Username or password does not exist')
+
+    context = { 'shirt_list':shirt_list, 'jumper_list':jumper_list, 'pants_list':pants_list, 'shoes_list':shoes_list, 'form': form}
     return render(request, 'base/home.html', context)
 
 def item(request, item_id):
@@ -55,42 +85,43 @@ def catagory(request,catagory):
     context = {'catagory': catagory, 'item_list': item_list, 'sort_value': sort_value}
     return render(request, 'base/catagory.html', context)
 
-def registerPage(request):
-    form = RegisterForm()
+# def registerPage(request):
+#     form = RegisterForm()
+#
+#     if request.method == 'POST':
+#         form = RegisterForm(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit=False)
+#             user.username = user.username.lower()
+#             user.save()
+#             login(request, user)
+#             return redirect('home')
+#         else:
+#             messages.error(request, 'An error occurred during registration')
+#
+#     return render(request, 'base/home.html', {'form': form})
 
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request, 'An error occurred during registration')
 
-    return render(request, 'base/home.html', {'form': form})
 
-def loginPage(request):
-    page = 'login'
-
-    if request.method == 'POST':
-        username = request.POST.get('username').lower()
-        password = request.POST.get('password')
-
-        try:
-            user = User.objects.get(username=username)
-        except:
-            messages.error(request, 'User does not exist')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request, 'Username or password does not exist')
-    context = {'page': page}
-
-    return render(request, 'base/home.html', context)
+# def loginPage(request):
+#
+#     if request.method == 'POST':
+#         username = request.POST.get('username').lower()
+#         password = request.POST.get('password')
+#
+#         try:
+#             user = User.objects.get(username=username)
+#         except:
+#             messages.error(request, 'User does not exist')
+#         user = authenticate(request, username=username, password=password)
+#         if user is not None:
+#             login(request, user)
+#             return redirect('home')
+#         else:
+#             messages.error(request, 'Username or password does not exist')
+#     context = {'page': page}
+#
+#     return render(request, 'base/home.html', context)
 
 def logoutUser(request):
     logout(request)

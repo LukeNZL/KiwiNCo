@@ -97,36 +97,70 @@ nav{
     width: 50px;
     object-fit: cover;
 }
-#login-signup-button{
-display: contents;
-}
+
 #account-image{
     height: 50px;
     width: 50px;
     object-fit: cover;
 }
 
+.login-button{
+    background-color: #f5f5f5;
+    font-size: 18px;
+    margin-top: 10px;
+    width: 224px;
+    height: 39px;
+    border-radius: 20px;
+    padding: 10px;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    color: black;
+    border-width: 2px;
+    border-style: outset;
+    border-color: black;
+    text-decoration:none;
+}
+
 #cart-container{
     position: relative;
     position: absolute;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
     top: 140px;
     right:20px;
-    width: 400px;
-    height: 600px;
-    background-color: #D2D2D2;
+    width: 360px;
+    height: 500px;
+    padding: 20px;
+    background-color: white;
     display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+#login-signup-button{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
 
 }
 
 #account-container{
     position: relative;
     position: absolute;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
     top: 140px;
     right:20px;
-    width: 400px;
-    height: 600px;
-    background-color: #D2D2D2;
-    display: inline-block;
+    width: 360px;
+    height: 360px;
+    padding: 20px;
+    background-color: white;
+    display: none;
+    flex-direction: column;
+    align-items: center;
 }
 
 #specials-box{
@@ -328,16 +362,19 @@ display: contents;
 }
 .login-box{
     height: auto;
-    width: 50%;
+    width: 100%;
     margin: auto;
     margin-top: 10px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 }
 .user-input{
     background-color: #f5;
     font-size: 18px;
     margin-top: 10px;
-    width: 60%;
+    width: 200px;
     height: 15px;
     border-radius: 20px;
     padding: 10px;
@@ -345,11 +382,20 @@ display: contents;
 
 }
 .header-button{
+    height: 20px;
+    width: auto;
+    display: flex;
+    margin: auto;
+    margin-top: 0px;
     margin-bottom: 0px;
-    margin-right: 20px;
-    width: 100px;
     align-content: center;
     align-items: center;
+}
+
+#display-user{
+    font-size: 24px;
+
+}
 
 footer{
     width: 100%;

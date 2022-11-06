@@ -38,32 +38,28 @@
     <div id="account-container">
         {% if request.user.is_authenticated %}
         <p id="display-user">Logged in as {{request.user}}</p>
-        <a href="{% url 'logout' %}" class="header-button">Logout</a>
+        <a href="{% url 'logout' %}" class="login-button">Logout</a>
         {% else %}
         <div id="login-signup-button">
-            <a href="{% url 'login' %}"  class="header-button">LOGIN</a>
+            <div onclick="showLogin()" class="header-button">LOGIN</div>
             <div class="header-divider">|</div>
-            <a href="{% url 'register' %}" class="header-button">SIGN UP</a>
+            <div onclick="showSignup()" class="header-button">SIGN UP</div>
         </div>
-        {% endif %}
-
-        {% if page == 'login' %}
-        <div>
-            <form method="POST", action="">
+        <div id="login_temp" style="display:none;">
+            <form method="POST">
                 {% csrf_token %}
                 <!--Login form-->
                 <div class="login-box">
                     <input class="user-input" type="text" placeholder="Username" name="username">
                     <input class="user-input" type="password" placeholder="Password" name="password">
                     <div>
-                        <input class="login-button" type="submit" value="Login" />
+                        <button class="login-button" type="submit" name="login">Login</button>
                     </div>
 
                 </div>
             </form>
         </div>
-        {% else %}
-        <div>
+        <div id="signup" style="display:none;">
             <form method="POST">
                 {% csrf_token %}
                 <!--Signup form that only works with no closing-->
@@ -72,13 +68,12 @@
                     <input class="user-input" placeholder="Password" type="password" action="{{form.password1}}
                     <input class="user-input" placeholder="Confirm Password" type="password" action="{{form.password2}}
                     <div>
-                        <input class="login-button" type="submit" value="Sign Up" />
+                        <button class="login-button" type="submit" name="register">Sign Up</button>
                     </div>
                 </div>
             </form>
         </div>
         {% endif %}
-
      <!--   {% if request.user.is_authenticated %}
         <p id="display-user">Logged in as {{request.user}}</p>
         <a href="{% url 'logout' %}" class="header-button">Logout</a>
@@ -138,6 +133,18 @@
                 document.getElementById("cart-container").style.display = "flex";
             }
             });
+        }
+
+        function showLogin(){
+            document.getElementById("login_temp").style.display = "flex";
+            document.getElementById("signup").style.display = "none";
+            console.log("slogin")
+        }
+
+        function showSignup(){
+            document.getElementById("signup").style.display = "flex";
+            document.getElementById("login_temp").style.display = "none";
+            console.log("signup")
         }
 
 
