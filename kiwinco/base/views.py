@@ -17,6 +17,14 @@ def home(request):
 
     form = RegisterForm()
 
+    ##search##
+    if request.method == 'GET':
+        if "search" in request.GET:
+            search_value = request.GET['search']
+            return redirect('/' + search_value)
+    ##search##
+
+    ## login ##
     if request.method == 'POST':
         if "register" in request.POST:  # add the name "register" in your html button
             form = RegisterForm(request.POST)
@@ -43,6 +51,8 @@ def home(request):
                 return redirect('home')
             else:
                 messages.error(request, 'Username or password does not exist')
+    ## login ##
+
 
     context = { 'shirt_list':shirt_list, 'jumper_list':jumper_list, 'pants_list':pants_list, 'shoes_list':shoes_list, 'form': form}
     return render(request, 'base/home.html', context)
@@ -52,6 +62,15 @@ def item(request, item_id):
 
     form = RegisterForm()
 
+    ##search##
+    if request.method == 'GET':
+        if "search" in request.GET:
+            search_value = request.GET['search']
+            return redirect('/' + search_value)
+    ##search##
+
+
+    ## login ##
     if request.method == 'POST':
         if "register" in request.POST:  # add the name "register" in your html button
             form = RegisterForm(request.POST)
@@ -78,6 +97,7 @@ def item(request, item_id):
                 return redirect('home')
             else:
                 messages.error(request, 'Username or password does not exist')
+    ## login ##
 
     context = {'item': item, 'form': form}
     return render(request, 'base/item.html', context)
@@ -89,6 +109,14 @@ def catagory(request,catagory):
     item_list = Item.objects.order_by('created')
 
     sort_value = 'Newest-Release'
+
+
+    ##search##
+    if request.method == 'GET':
+        if "search" in request.GET:
+            search_value = request.GET['search']
+            return redirect('/' + search_value)
+    ##search##
 
     if 'sort_value' in request.GET:
         if (request.GET['sort_value'] == 'Oldest-Release'):
@@ -113,8 +141,10 @@ def catagory(request,catagory):
     elif (catagory == 'Shoes'):
         item_list = item_list.filter(Shoes=True)
     else:
-        return redirect('home')
+        item_list = item_list.filter(ItemName__contains=catagory)
+        catagory = 'Search Result: "' + catagory + '"'
 
+    ## login ##
     if request.method == 'POST':
         if "register" in request.POST:  # add the name "register" in your html button
             form = RegisterForm(request.POST)
@@ -141,6 +171,7 @@ def catagory(request,catagory):
                 return redirect('home')
             else:
                 messages.error(request, 'Username or password does not exist')
+    ## login ##
 
     context = {'catagory': catagory, 'item_list': item_list, 'sort_value': sort_value, 'form': form}
     return render(request, 'base/catagory.html', context)

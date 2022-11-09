@@ -28,7 +28,10 @@
         <div id="search-image-box">
             <img id="search-image" src="{% static 'images/Search.png' %}">
         </div>
-        <div id="search-bar" contenteditable="True"></div>
+        <form method="GET">
+            <input id="search-bar" contenteditable="True" name="search"></input>
+            <input type="submit" hidden />
+        </form>
     </div>
 
     <div id="account-image-box" onclick=showAccount()>
@@ -113,6 +116,7 @@
     </div>
 
     <div id="cart-container">
+
     </div>
 
     <div id="cart-image-box" onclick=showCart()>
