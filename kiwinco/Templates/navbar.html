@@ -116,7 +116,18 @@
     </div>
 
     <div id="cart-container">
+        {% if cart %}
+            {% for i in cart %}
+                <div id="cart-item-container">
+                    <div id="cart-item-name">{{i.itemId}}</div>
+                    <div id="cart-item-price">${{i.price}}</div>
+                    <div id="remove-from-cart" onclick="removeFromCart({{i.id}})">remove</div>
 
+                </div>
+
+            {% endfor %}
+            <a id="buy-button" href="{% url 'buyCart' %}">BUY</a>
+        {% endif %}
     </div>
 
     <div id="cart-image-box" onclick=showCart()>
@@ -167,6 +178,17 @@
             });
         }
 
+        //Add Ajax & Jquery to head
+        var x = document.createElement('script');
+        x.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        document.getElementsByTagName("head")[0].appendChild(x);
+
+        function removeFromCart(id, size, cart_id){
+            var data = {'id': id}
+            var URL = "{% url 'removeFromCart' %}"
+            $.post(URL, data);
+            console.log("sent")
+        }
 
     </script>
 </nav>

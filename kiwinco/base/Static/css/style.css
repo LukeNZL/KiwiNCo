@@ -139,6 +139,14 @@ nav{
     align-items: center;
 }
 
+#cart-item-container{
+    width: 100%;
+    height: 60px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between:
+}
+
 #login-signup-button{
     width: 100%;
     display: flex;

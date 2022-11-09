@@ -53,8 +53,14 @@ def home(request):
                 messages.error(request, 'Username or password does not exist')
     ## login ##
 
-
     context = { 'shirt_list':shirt_list, 'jumper_list':jumper_list, 'pants_list':pants_list, 'shoes_list':shoes_list, 'form': form}
+
+    ##cart##
+    if request.user.is_authenticated:
+        cart = CartedItem.objects.filter(buyerId = request.user.id)
+        context['cart']=cart
+    ##cart##
+
     return render(request, 'base/home.html', context)
 
 def item(request, item_id):
@@ -100,6 +106,13 @@ def item(request, item_id):
     ## login ##
 
     context = {'item': item, 'form': form}
+
+    ##cart##
+    if request.user.is_authenticated:
+        cart = CartedItem.objects.filter(buyerId = request.user.id)
+        context['cart']=cart
+    ##cart##
+
     return render(request, 'base/item.html', context)
 
 def catagory(request,catagory):
@@ -174,6 +187,13 @@ def catagory(request,catagory):
     ## login ##
 
     context = {'catagory': catagory, 'item_list': item_list, 'sort_value': sort_value, 'form': form}
+
+    ##cart##
+    if request.user.is_authenticated:
+        cart = CartedItem.objects.filter(buyerId = request.user.id)
+        context['cart']=cart
+    ##cart##
+
     return render(request, 'base/catagory.html', context)
 
 # def registerPage(request):
@@ -224,6 +244,63 @@ def addToCart(request, item_id):
         if request.user.is_authenticated:
             x = CartedItem(price=request.POST['price'], itemId=item_id, buyerId=request.user.id, itemSize=request.POST['size'])
             x.save()
+            # i = Item.objects.get(pk=item_id)
+            # if request.POST['size'] == 'XS':
+            #     i.Stock_XS = i.Stock_XS-1
+            # elif request.POST['size'] == 'S':
+            #     i.Stock_S = i.Stock_S - 1
+            # elif request.POST['size'] == 'M':
+            #     i.Stock_M = i.Stock_M - 1
+            # elif request.POST['size'] == 'L':
+            #     i.Stock_L = i.Stock_L - 1
+            # elif request.POST['size'] == 'XL':
+            #     i.Stock_XL = i.Stock_XL - 1
+            # i.save()
         else:
             messages.error(request, 'Must be logged in to cart items')
-    return redirect("/" + str(item_id) )
+    return redirect("/" + str(item_id))
+
+@csrf_exempt
+def removeFromCart(request):
+    u = CartedItem.objects.get(id=request.POST.get('id'))
+    u.delete()
+
+    return redirect('home')
+
+def buyCart(request):
+    if request.user.is_authenticated:
+        u = CartedItem.objects.filter(buyerId=request.user.id)
+        for i in u:
+            j = Item.objects.get(pk=i.itemId)
+            if i.itemSize == 'XS':
+                j.Stock_XS = j.Stock_XS-1
+            elif i.itemSize == 'S':
+                j.Stock_S = j.Stock_S - 1
+            elif i.itemSize == 'M':
+                j.Stock_M = j.Stock_M - 1
+            elif i.itemSize == 'L':
+                j.Stock_L = j.Stock_L - 1
+            elif i.itemSize == 'XL':
+                j.Stock_XL = j.Stock_XL - 1
+            j.save()
+            i.delete()
+    return redirect('home')
+
+@csrf_exempt
+def buyItem(request):
+    if request.user.is_authenticated:
+
+        u = Item.objects.get(id=request.POST['id'])
+        if request.POST['size'] == 'XS':
+            u.Stock_XS = u.Stock_XS-1
+        elif request.POST['size'] == 'S':
+            u.Stock_S = u.Stock_S - 1
+        elif request.POST['size'] == 'M':
+            u.Stock_M = u.Stock_M - 1
+        elif request.POST['size'] == 'L':
+            u.Stock_L = u.Stock_L - 1
+        elif request.POST['size'] == 'XL':
+            u.Stock_XL = u.Stock_XL - 1
+        u.save()
+
+    return redirect('home')

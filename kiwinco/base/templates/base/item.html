@@ -147,21 +147,24 @@
             document.getElementsByTagName("head")[0].appendChild(x);
 
         function addToCart(){
-            console.log(in_stock)
             price = {{item.Price}}
             item_id = {{item.id}}
             if (selected_size != '' && in_stock == true){
                 var data = {'size': selected_size, 'price': price}
                 var URL = "{% url 'addToCart' item.id %}"
                 $.post(URL, data);
-                console.log("sent")
             }
         }
 
         function buyNow(){
-
-        }
-
+            price = {{item.Price}}
+            id = {{item.id}}
+            if (selected_size != '' && in_stock == true){
+                var data = {'size': selected_size, 'id': id}
+                var URL = "{% url 'buyItem' %}"
+                $.post(URL, data);
+                }
+            }
     </script>
 
     <footer></footer>
