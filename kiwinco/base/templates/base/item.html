@@ -3,6 +3,9 @@
 {% block content %}
 
 <body>
+
+    <div id="cart-add-notif" style="">Item added to cart</div>
+
     <div id="item-container">
         <div id="item-images-container">
             <div id="large-image-container">
@@ -150,6 +153,10 @@
             price = {{item.Price}}
             item_id = {{item.id}}
             if (selected_size != '' && in_stock == true){
+                console.log('.')
+                document.getElementById('cart-add-notif').style.display = "flex";
+                setTimeout(() => {  document.getElementById('cart-add-notif').style.display = "none"; }, 3000);
+
                 var data = {'size': selected_size, 'price': price}
                 var URL = "{% url 'addToCart' item.id %}"
                 $.post(URL, data);
@@ -160,11 +167,14 @@
             price = {{item.Price}}
             id = {{item.id}}
             if (selected_size != '' && in_stock == true){
+
                 var data = {'size': selected_size, 'id': id}
                 var URL = "{% url 'buyItem' %}"
                 $.post(URL, data);
                 }
+
             }
+
     </script>
 
     <footer></footer>

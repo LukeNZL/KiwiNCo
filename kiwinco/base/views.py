@@ -58,7 +58,12 @@ def home(request):
     ##cart##
     if request.user.is_authenticated:
         cart = CartedItem.objects.filter(buyerId = request.user.id)
+        total = sum(cart.values_list('price', flat=True))
+
         context['cart']=cart
+        context['total'] = total
+
+
     ##cart##
 
     return render(request, 'base/home.html', context)
@@ -110,7 +115,10 @@ def item(request, item_id):
     ##cart##
     if request.user.is_authenticated:
         cart = CartedItem.objects.filter(buyerId = request.user.id)
+        total = sum(cart.values_list('price', flat=True))
+
         context['cart']=cart
+        context['total'] = total
     ##cart##
 
     return render(request, 'base/item.html', context)
@@ -191,7 +199,10 @@ def catagory(request,catagory):
     ##cart##
     if request.user.is_authenticated:
         cart = CartedItem.objects.filter(buyerId = request.user.id)
+        total = sum(cart.values_list('price', flat=True))
+
         context['cart']=cart
+        context['total'] = total
     ##cart##
 
     return render(request, 'base/catagory.html', context)
@@ -264,8 +275,9 @@ def addToCart(request, item_id):
 def removeFromCart(request):
     u = CartedItem.objects.get(id=request.POST.get('id'))
     u.delete()
+    return render(request, 'base/home.html')
+    return redirect('/1')
 
-    return redirect('home')
 
 def buyCart(request):
     if request.user.is_authenticated:

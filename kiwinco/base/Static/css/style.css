@@ -144,7 +144,30 @@ nav{
     height: 60px;
     display:flex;
     flex-direction: row;
-    justify-content: space-between:
+    justify-content: space-between;
+}
+
+#remove-from-cart{
+    text-decoration: underline;
+    color: grey;
+    cursor: pointer;
+}
+
+#cart-add-notif{
+    width: 150px;
+    height: 70px;
+    background-color: #D9D9D9;
+    position: absolute;
+    right: 0;
+    margin-top:-20px;
+    margin-right: 20px;
+    border-radius: 20px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 18px;
+
 }
 
 #login-signup-button{
@@ -341,6 +364,7 @@ nav{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 #XS{}
@@ -367,6 +391,7 @@ nav{
     align-items: center;
     font-size: 24px;
     margin-top: 30px;
+    cursor: pointer;
 }
 .login-box{
     height: auto;
