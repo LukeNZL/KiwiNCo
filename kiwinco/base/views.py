@@ -253,7 +253,7 @@ def logoutUser(request):
 def addToCart(request, item_id):
     if request.method == "POST":
         if request.user.is_authenticated:
-            x = CartedItem(price=request.POST['price'], itemId=item_id, buyerId=request.user.id, itemSize=request.POST['size'])
+            x = CartedItem(price=request.POST['price'], itemId=item_id, buyerId=request.user.id, itemSize=request.POST['size'], itemName=request.POST['name'])
             x.save()
             # i = Item.objects.get(pk=item_id)
             # if request.POST['size'] == 'XS':

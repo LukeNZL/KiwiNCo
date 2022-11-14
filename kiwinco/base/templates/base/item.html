@@ -152,12 +152,12 @@
         function addToCart(){
             price = {{item.Price}}
             item_id = {{item.id}}
-            if (selected_size != '' && in_stock == true){
-                console.log('.')
+            name = '{{item.ItemName}}'
+            if (selected_size != '' && in_stock && 'True'== '{{request.user.is_authenticated}}'){
                 document.getElementById('cart-add-notif').style.display = "flex";
                 setTimeout(() => {  document.getElementById('cart-add-notif').style.display = "none"; }, 3000);
 
-                var data = {'size': selected_size, 'price': price}
+                var data = {'size': selected_size, 'price': price, 'name': name}
                 var URL = "{% url 'addToCart' item.id %}"
                 $.post(URL, data);
             }
