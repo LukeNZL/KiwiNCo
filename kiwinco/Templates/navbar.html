@@ -119,14 +119,24 @@
         {% if cart %}
             {% for i in cart %}
                 <div id="cart-item-container">
-                    <div id="cart-item-name">{{i.itemId}}</div>
-                    <div id="cart-item-price">${{i.price}}</div>
-                    <div id="remove-from-cart" onclick="removeFromCart({{i.id}})">remove</div>
+                    <div style="display: flex;">
+                        <div style="margin-right: 25px; font-size: 18px;" id="cart-item-name">{{i.itemName}}</div>
+                        <div style="font-size: 18px;" id="cart-item-size">{{i.itemSize}}</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 18px;" id="cart-item-price">${{i.price}}</div>
+                        <div id="remove-from-cart" onclick="removeFromCart({{i.id}})">Remove</div>
+                    </div>
+
 
                 </div>
 
             {% endfor %}
-            <a id="buy-button" href="{% url 'buyCart' %}">BUY</a>
+            <div style="width: 100%; height: 30px; position: absolute; bottom: 0; margin-bottom: 20px; display: flex; justify-content: space-around;">
+                <div style="font-size: 22px">Total: ${{total}}</div>
+                <a style="font-size: 22px;" id="buy-button" href="{% url 'buyCart' %}">BUY CART</a>
+            </div>
+
         {% endif %}
     </div>
 
