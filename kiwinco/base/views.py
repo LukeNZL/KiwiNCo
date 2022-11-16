@@ -1,7 +1,7 @@
 import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import Item, CartedItem
+from .models import Item, CartedItem, Purchase
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -58,7 +58,12 @@ def home(request):
     ##cart##
     if request.user.is_authenticated:
         cart = CartedItem.objects.filter(buyerId = request.user.id)
+        total = sum(cart.values_list('price', flat=True))
+
         context['cart']=cart
+        context['total'] = total
+
+
     ##cart##
 
     return render(request, 'base/home.html', context)
@@ -110,7 +115,10 @@ def item(request, item_id):
     ##cart##
     if request.user.is_authenticated:
         cart = CartedItem.objects.filter(buyerId = request.user.id)
+        total = sum(cart.values_list('price', flat=True))
+
         context['cart']=cart
+        context['total'] = total
     ##cart##
 
     return render(request, 'base/item.html', context)
@@ -191,7 +199,10 @@ def catagory(request,catagory):
     ##cart##
     if request.user.is_authenticated:
         cart = CartedItem.objects.filter(buyerId = request.user.id)
+        total = sum(cart.values_list('price', flat=True))
+
         context['cart']=cart
+        context['total'] = total
     ##cart##
 
     return render(request, 'base/catagory.html', context)
@@ -242,7 +253,7 @@ def logoutUser(request):
 def addToCart(request, item_id):
     if request.method == "POST":
         if request.user.is_authenticated:
-            x = CartedItem(price=request.POST['price'], itemId=item_id, buyerId=request.user.id, itemSize=request.POST['size'])
+            x = CartedItem(price=request.POST['price'], itemId=item_id, buyerId=request.user.id, itemSize=request.POST['size'], itemName=request.POST['name'])
             x.save()
             # i = Item.objects.get(pk=item_id)
             # if request.POST['size'] == 'XS':
@@ -264,8 +275,9 @@ def addToCart(request, item_id):
 def removeFromCart(request):
     u = CartedItem.objects.get(id=request.POST.get('id'))
     u.delete()
+    return render(request, 'base/home.html')
+    return redirect('/1')
 
-    return redirect('home')
 
 def buyCart(request):
     if request.user.is_authenticated:
@@ -282,6 +294,8 @@ def buyCart(request):
                 j.Stock_L = j.Stock_L - 1
             elif i.itemSize == 'XL':
                 j.Stock_XL = j.Stock_XL - 1
+            x = Purchase(price=i.price, buyerId=request.user.id, itemSize=i.itemSize, itemName=i.itemName)
+            x.save()
             j.save()
             i.delete()
     return redirect('home')
@@ -301,6 +315,8 @@ def buyItem(request):
             u.Stock_L = u.Stock_L - 1
         elif request.POST['size'] == 'XL':
             u.Stock_XL = u.Stock_XL - 1
+        x = Purchase(price=u.Price, buyerId=request.user.id, itemSize=request.POST['size'], itemName=u.ItemName)
+        x.save()
         u.save()
 
     return redirect('home')
