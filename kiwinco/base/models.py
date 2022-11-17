@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class CartedItem(models.Model):
     itemId = models.PositiveIntegerField()
+    itemName = models.CharField(max_length=30)
     buyerId = models.PositiveIntegerField()
     itemSize = models.CharField(max_length=3)
     price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
@@ -25,3 +26,8 @@ class Item(models.Model):
     Image = models.ImageField(upload_to='images/')
     created = models.DateTimeField(auto_now_add=True)
 
+class Purchase(models.Model):
+    itemName = models.CharField(max_length=30)
+    itemSize = models.CharField(max_length=3)
+    buyerId = models.PositiveIntegerField()
+    price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
