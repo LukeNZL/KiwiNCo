@@ -24,9 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!ad7-z@j96anv!lurxns8$y811fa)p@8ycd$l3_g*k$@&9_pz!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = [kiwinco-test-dev.ap-southeast-2.elasticbeanstalk.com]
 
 
 # Application definition
@@ -77,6 +74,15 @@ WSGI_APPLICATION = 'kiwinco.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
+if 'PYTHONPATH' in os.environ:
+    DEBUG = False
+    ALLOWED_HOSTS = ['KiwiNCo-test-dev.ap-southeast-2.elasticbeanstalk.com']
+
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = []
+
 
 DATABASES = {
     'default': {
