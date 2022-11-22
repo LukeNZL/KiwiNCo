@@ -13,7 +13,7 @@ def home(request):
     shirt_list = Item.objects.filter(Shirt = True)[:7]
     jumper_list = Item.objects.filter(Jumper_Jacket=True)[:7]
     pants_list = Item.objects.filter(Pants=True)[:7]
-    shoes_list = Item.objects.filter(Shoes=True)[:7]
+    featured_list = Item.objects.filter(Featured=True)[:7]
 
     form = RegisterForm()
 
@@ -53,7 +53,7 @@ def home(request):
                 messages.error(request, 'Username or password does not exist')
     ## login ##
 
-    context = { 'shirt_list':shirt_list, 'jumper_list':jumper_list, 'pants_list':pants_list, 'shoes_list':shoes_list, 'form': form}
+    context = { 'shirt_list':shirt_list, 'jumper_list':jumper_list, 'pants_list':pants_list, 'featured_list':featured_list, 'form': form}
 
     ##cart##
     if request.user.is_authenticated:
@@ -159,8 +159,8 @@ def catagory(request,catagory):
         item_list = item_list.filter(Jumper_Jacket=True)
     elif (catagory == 'Pants'):
         item_list = item_list.filter(Pants=True)
-    elif (catagory == 'Shoes'):
-        item_list = item_list.filter(Shoes=True)
+    elif (catagory == 'Featured'):
+        item_list = item_list.filter(Featured=True)
     else:
         item_list = item_list.filter(ItemName__contains=catagory)
         catagory = 'Search Result: "' + catagory + '"'

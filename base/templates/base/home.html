@@ -5,9 +5,28 @@
 <body>
 
     <div id="specials-box">
-        <img id="specials-img" src="">
+        <img id="specials-img" src="{% static 'images/Home-Image2.png' %}">
     </div>
 
+    <div id = "main-catagory-container">
+        <div id="main-catagory-title">Featured</div>
+        <div id="main-item-row">
+                {% for list in featured_list %}
+
+                <a id="main-item-container" href="{% url 'item' list.id %}">
+                    <div id="main-item-image-box">
+                        <img id="main-item-image" src="{{ list.Image.url }}" alt="">
+                    </div>
+                    <div id="main-item-cost">${{ list.Price }}</div>
+                </a>
+
+                {% endfor %}
+        </div>
+
+        <a href="{% url 'catagory' 'Featured' %}">see all</a>
+
+
+    </div>
 
     <div id = "main-catagory-container">
         <div id="main-catagory-title">Shirts</div>
@@ -84,25 +103,7 @@
 
     </div>
 
-    <div id = "main-catagory-container">
-        <div id="main-catagory-title">Shoes</div>
-        <div id="main-item-row">
-                {% for list in shoes_list %}
 
-                <a id="main-item-container" href="{% url 'item' list.id %}">
-                    <div id="main-item-image-box">
-                        <img id="main-item-image" src="{{ list.Image.url }}" alt="">
-                    </div>
-                    <div id="main-item-cost">${{ list.Price }}</div>
-                </a>
-
-                {% endfor %}
-        </div>
-
-        <a href="{% url 'catagory' 'Shoes' %}">see all</a>
-
-
-    </div>
 
 
     <footer>

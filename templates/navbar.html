@@ -10,6 +10,9 @@
     </a>
 
     <div id="catagory-container">
+        <a class="unselectable" class="header-catagories" href="{% url 'catagory' 'Featured' %}">
+            <div style="display: flex; justify-content: center; font-size: 32px;">Featured</div>
+        </a>
         <a class="unselectable" class="header-catagories" href="{% url 'catagory' 'Shirts' %}">
             <div style="display: flex; justify-content: center; font-size: 32px;">Shirts</div>
         </a>
@@ -18,9 +21,6 @@
         </a>
         <a class="unselectable" class="header-catagories" href="{% url 'catagory' 'Pants' %}">
             <div style="display: flex; justify-content: center; font-size: 32px;">Pants</div>
-        </a>
-        <a class="unselectable" class="header-catagories" href="{% url 'catagory' 'Shoes' %}">
-            <div style="display: flex; justify-content: center; font-size: 32px;">Shoes</div>
         </a>
     </div>
 
