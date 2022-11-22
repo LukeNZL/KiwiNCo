@@ -137,12 +137,38 @@ USE_I18N = True
 USE_TZ = True
 
 
+
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = 'static'
+AWS_STORAGE_BUCKET_NAME = 'kiwinco-app-bucket'
+AWS_S3_REGION_NAME = 'ap-southeast-2'
 
+
+
+AWS_S3_ACCESS_KEY_ID = 'AKIAVMXNK6O7WD7DQF42'
+AWS_S3_SECRET_ACCESS_KEY = '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'
+
+
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+   'CacheControl': 'max-age=86400',
+}
+AWS_S3_FILE_OVERWRITE = False
+#AWS_DEFAULT_ACL = 'public-read'
+AWS_DEFAULT_ACL = None
+AWS_LOCATION = 'static'
+STATICFILES_DIRS = [
+   'static',
+]
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#STATIC_ROOT = 'static'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
