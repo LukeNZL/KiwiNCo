@@ -31,13 +31,13 @@ SECRET_KEY = 'django-insecure-!ad7-z@j96anv!lurxns8$y811fa)p@8ycd$l3_g*k$@&9_pz!
 INSTALLED_APPS = [
     'base.apps.BaseConfig',
 
-    'KiwiNCo_test',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'kiwinco',
 ]
 
 MIDDLEWARE = [
