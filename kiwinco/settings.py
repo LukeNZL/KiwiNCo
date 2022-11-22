@@ -77,19 +77,32 @@ WSGI_APPLICATION = 'kiwinco.wsgi.application'
 
 if 'PYTHONPATH' in os.environ:
     DEBUG = False
-    ALLOWED_HOSTS = ['KiwiNCo-test-dev.ap-southeast-2.elasticbeanstalk.com']
+    ALLOWED_HOSTS = ['.ap-southeast-2.elasticbeanstalk.com']
 
 else:
     DEBUG = True
     ALLOWED_HOSTS = []
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if 'RDS_DB_NAME' in os.environ:
+
+    DATABASES = {
+            'default': {
+                'ENGINE':'django.db.backends.postgresql_psycopg2',
+                'NAME': os.environ['RDS_DB_NAME'],
+                'USER': os.environ['RDS_USERNAME'],
+                'PASSWORD': os.environ['RDS_PASSWORD'],
+                'HOST': os.environ['RDS_HOSTNAME'],
+                'PORT': os.environ['RDS_PORT'],
+            }
+        }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
 
 
 # Password validation
