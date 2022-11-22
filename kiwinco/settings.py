@@ -31,6 +31,7 @@ SECRET_KEY = 'django-insecure-!ad7-z@j96anv!lurxns8$y811fa)p@8ycd$l3_g*k$@&9_pz!
 INSTALLED_APPS = [
     'base.apps.BaseConfig',
 
+    'KiwiNCo_test',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,7 +77,7 @@ WSGI_APPLICATION = 'kiwinco.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 if 'PYTHONPATH' in os.environ:
-    DEBUG = False
+    DEBUG = True
     ALLOWED_HOSTS = ['.ap-southeast-2.elasticbeanstalk.com']
 
 else:
