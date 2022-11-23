@@ -62,8 +62,6 @@ def home(request):
 
         context['cart']=cart
         context['total'] = total
-
-
     ##cart##
 
     return render(request, 'base/home.html', context)
